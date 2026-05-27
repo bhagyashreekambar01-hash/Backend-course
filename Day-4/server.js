@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
+const cors = require("cors")
 const app=express();
 
 require("dotenv").config()
@@ -18,10 +18,10 @@ app.use(express.json());
 app.post("/signin",createAccount);
 app.post("/login",login);
 app.post("/notebook",createNotebook);
-app.get("/allNotes",auth,getNotes);
-app.put("/update/:id",auth,updateNotebook)
+app.get("/allNotes",getNotes);
+app.put("/update/:id",updateNotebook)
 
-app.delete("/api/delete-node/:id",auth,deleteNotebook) 
+app.delete("/api/delete-node/:id",deleteNotebook) 
 
 app.delete('/delete-note/:id', async (req, res) => {
     const noteId = req.params.id;
@@ -34,12 +34,6 @@ app.delete('/delete-note/:id', async (req, res) => {
     
       res.send("Notes is deleted");
 });
-
-
-
-
-
-
 
 mongoose.connect(mongo_url)
 .then(()=>{

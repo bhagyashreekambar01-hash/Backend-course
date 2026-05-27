@@ -1,7 +1,6 @@
 const notebook = require('../model/notes')
 
 
-
 const createNotebook = async(req,res)=>{
     try {
         const{heading,content}=req.body;
