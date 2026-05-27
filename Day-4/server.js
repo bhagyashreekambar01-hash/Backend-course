@@ -9,7 +9,8 @@ const mongo_url=process.env.mongo_url;
 
 const {createAccount,login}=require("./controllers/user");
 const { createNotebook,getNotes,updateNotebook,deleteNotebook} = require("./controllers/notes");
-
+const middleware=require('./mddleware/auth');
+const auth = require("./mddleware/auth");
 
 
 app.use(express.json());
@@ -17,10 +18,10 @@ app.use(express.json());
 app.post("/signin",createAccount);
 app.post("/login",login);
 app.post("/notebook",createNotebook);
-app.get("/allNotes",getNotes);
-app.put("/update/:id",updateNotebook)
-app.put("/delete/:id",deleteNotebook)
-app.delete("/api/delete-node/:id",deleteNotebook)
+app.get("/allNotes",auth,getNotes);
+app.put("/update/:id",auth,updateNotebook)
+
+app.delete("/api/delete-node/:id",auth,deleteNotebook) 
 
 app.delete('/delete-note/:id', async (req, res) => {
     const noteId = req.params.id;

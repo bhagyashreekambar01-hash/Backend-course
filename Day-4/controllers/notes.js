@@ -1,5 +1,7 @@
 const notebook = require('../model/notes')
 
+
+
 const createNotebook = async(req,res)=>{
     try {
         const{heading,content}=req.body;
@@ -12,7 +14,7 @@ const createNotebook = async(req,res)=>{
         res.send(e.message);
     }
 }
-
+                                                                  
 const getNotes=async (req,res) => {
     try {
         const allNotebooks=await notebook.find();
